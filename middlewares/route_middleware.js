@@ -1,6 +1,6 @@
 module.exports = {
-    notfoundRouteCheck : function (req, res) {
+    notfoundCheckRoute: function (req, res) {
         res.status(404).
-        send('Not allowed')
+        send('404')
     }
 }
