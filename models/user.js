@@ -47,12 +47,14 @@ module.exports = (sequelize, DataTypes) => {
     username: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
+    gender: DataTypes.STRING,
     image_name_user: DataTypes.STRING,
     image_path_user: DataTypes.STRING,
     description_user: DataTypes.STRING(2000),
     role_user: DataTypes.STRING,
     status_user: DataTypes.STRING,
     is_verified: DataTypes.BOOLEAN,
+    verified_count: DataTypes.INTEGER,
     star_user: DataTypes.FLOAT
   }, {
     sequelize,
