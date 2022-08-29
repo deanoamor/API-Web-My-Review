@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+</head>
+<body>
+    <h1>Ini template email {{email}}</h1>
+    <form action="http://localhost:3000/web/user/email/verified/page" method="POST">
+        <input type="hidden" name="email" value="{{email}}">
+        <input type="hidden" name="is_verified" value="{{is_verified}}">
+        <button type="submit">Verify now</button>
+    </form>
+</body>
+</html>
