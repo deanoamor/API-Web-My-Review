@@ -29,7 +29,7 @@ module.exports = {
 
         jwt.verify(token, baseConfig.auth_secret, (err, decoded) => {
             if(err){
-                res.status(403).send(response(403,'unauthorized'));
+                res.status(403).send(response(403,'unauthorized, your token already expired'));
                 return;
             }
 
@@ -50,7 +50,7 @@ module.exports = {
         })
 
         if(!tokenCheck){
-            res.status(403).send(response(403,'unauthorized , you should login first'));
+            res.status(403).send(response(403,'unauthorized , you already logout'));
             return;
         }else{
             next();
@@ -59,14 +59,8 @@ module.exports = {
     },
 
     isAdmin: async (req, res, next) => {
-        let admin = await Admin.findOne({
-            where:{
-                id: data.id,
-                role: 'Admin'
-            }
-        });
 
-        if(!admin && data.role !== 'Admin'){
+        if(data.role_user !== 'Admin'){
             res.status(403).send(response(403,'unauthorized , youre not an admin'));
             return;
         }else{
@@ -82,5 +76,26 @@ module.exports = {
         }else{
             next();
         }
+    },
+
+    isActiveUser: async (req, res, next) => {
+        let user = await User.findOne({
+            where:{
+                id: data.id,
+                role_user: 'User'
+            }
+        });
+
+        if(!user){
+            res.status(403).send(response(403,'user not found'));
+            return;
+        }
+
+        if(user.status_user !== 'Active'){
+            res.status(403).send(response(403,'user not active'));
+            return;
+        }
+
+        next();
     }
 }
