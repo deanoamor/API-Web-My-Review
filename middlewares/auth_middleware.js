@@ -29,7 +29,7 @@ module.exports = {
 
         jwt.verify(token, baseConfig.auth_secret, (err, decoded) => {
             if(err){
-                res.status(403).send(response(403,'unauthorized, your token already expired'));
+                res.status(403).send(response(403,'unauthorized, your token already expired or invalid'));
                 return;
             }
 
