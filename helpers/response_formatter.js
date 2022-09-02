@@ -1,6 +1,6 @@
 module.exports = {
 
-    response : function (status, message , data) {
+    response : (status, message , data) => {
         if(data){
             return {
                 status: status,
@@ -12,6 +12,17 @@ module.exports = {
                 status: status,
                 message: message
             };
+        }
+        
+    },
+
+    responsePagination : (status, message , data , totalpage, curentpage) => {
+        return{
+            status: status,
+            message: message,
+            data: data,
+            totalpage: totalpage,
+            curentpage: curentpage
         }
         
     },
