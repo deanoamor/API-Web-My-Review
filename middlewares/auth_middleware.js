@@ -49,7 +49,7 @@ module.exports = {
             }
         })
 
-        if(!tokenCheck){
+        if(tokenCheck){
             res.status(403).send(response(403,'unauthorized , you already logout'));
             return;
         }else{

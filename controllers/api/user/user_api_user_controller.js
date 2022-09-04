@@ -190,13 +190,8 @@ module.exports = {
                 expiresIn: 86400 // expires in 24 hours
             });
             
-            //insert token to token table
-            let tokenInsert = await Token.create({
-                users_id: userEmail.id,
-                token: token
-            });
 
-            res.status(200).send(response(200,'success', tokenInsert));
+            res.status(200).send(response(200,'Login success', token));
         }catch(err){
             res.status(500).send(response(500,'internal server error',err));
             console.log(err);
@@ -441,12 +436,12 @@ module.exports = {
         try{
             //delete token
             let token = req.headers.authorization.split(' ')[1];
-            await Token.destroy({
-                where:{
-                    token: token
-                }
+            //insert token to token table
+            let tokenInsert = await Token.create({
+                users_id: data.id,
+                token: token
             });
-            res.status(200).send(response(200,'token deleted', token));
+            res.status(200).send(response(200,'token deleted', tokenInsert));
         }catch(err){
             res.status(500).send(response(500,'internal server error',err));
             console.log(err);
