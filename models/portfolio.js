@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Portfolio.init({
+    users_id: DataTypes.BIGINT,
     name_portfolio: DataTypes.STRING,
     description_portfolio: DataTypes.STRING(500),
     link_portfolio: DataTypes.STRING,

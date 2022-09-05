@@ -16,11 +16,11 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      link_portfolio:{
-        type: Sequelize.STRING
-      },
       description_portfolio: {
         type: Sequelize.STRING(500)
+      },
+      link_portfolio:{
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
