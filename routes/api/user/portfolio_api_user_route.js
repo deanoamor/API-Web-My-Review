@@ -22,6 +22,11 @@ route.get('/user/portfolio/get', //route
 [mid.userMiddleware, mid.authMiddlweware.isActiveUser, upload.array()], //middleware
 portfolioApiUserController.getPortfolioUser); //controller
 
+//get portfolio by id route
+route.get('/user/portfolio/get/id', //route
+[mid.userMiddleware, mid.authMiddlweware.isActiveUser, upload.array()], //middleware
+portfolioApiUserController.getPortfolioByIdUser); //controller
+
 //update portfolio route
 route.put('/user/portfolio/update', //route
 [mid.userMiddleware, mid.authMiddlweware.isActiveUser, upload.array()], //middleware

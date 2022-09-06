@@ -13,6 +13,8 @@ const Validator = require("fastest-validator");
 const v = new Validator();
 
 module.exports = {
+
+    //create portfolio user
     createPortfoiloUser: async (req, res) => {
         try{
 
@@ -56,6 +58,7 @@ module.exports = {
         }
     },
 
+    //get all portfolio user
     getPortfolioUser: async (req, res) => {
         try{
             const { limit, offset } = pagination(req.body.page - 1, req.body.size);
@@ -81,6 +84,33 @@ module.exports = {
         }
     },
 
+    //get portfolio by id user
+    getPortfolioByIdUser: async (req, res) => {
+        try{
+            //get portfolio by id
+            const portfolio = await Portfolio.findOne({
+                where: {
+                    id: req.body.id,
+                    users_id: data.id
+                },
+                include:{
+                    model: User,
+                }
+            });
+
+            if(!portfolio){
+                res.status(404).send(response(404,'portfolio not found'));
+                return;
+            }
+
+            res.status(200).send(response(200,'success get portfolio by id', portfolio));
+        }catch(err){
+            res.status(500).send(response(500,'internal server error',err));
+            console.log(err);
+        }
+    },
+
+    //update portfolio by id user
     updatePortfolioUser: async (req, res) => {
         try{
             //create schema
@@ -145,6 +175,7 @@ module.exports = {
         }
     },
 
+    //delete portfolio by id user
     deletePortfolioUser: async (req, res) => {
         try{
 
