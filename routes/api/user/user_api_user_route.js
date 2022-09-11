@@ -25,36 +25,36 @@ userApiUserController.loginUserUser); //controller
 //get user self route
 route.get('/user/user/get/self', //route
 [mid.userMiddleware, mid.authMiddlweware.isActiveUser], //middleware
-userApiUserController.getProfileSelfUserUser); //controller
+userApiUserController.getProfileUserSelfUser); //controller
 
 //get user all route
 route.get('/user/user/get/all', //route
 [mid.userMiddleware, mid.authMiddlweware.isActiveUser, upload.array()], //middleware
 userApiUserController.getProfileAllUserUser); //controller
 
-//get user by id route
+//get user self by id route
 route.get('/user/user/get/byid', //route
 [mid.userMiddleware, mid.authMiddlweware.isActiveUser, upload.array()], //middleware
 userApiUserController.getProfileByIdUserUser); //controller
 
-//update user photo route
-route.put('/user/user/update/photo', //route
+//update user self photo route
+route.put('/user/user/update/self/photo', //route
 [mid.userMiddleware ,mid.authMiddlweware.isActiveUser, upload.single('image_name_user')], //middleware
-userApiUserController.uploadPhotoUserUser); //controller
+userApiUserController.uploadPhotoUserSelfUser); //controller
 
-//update user description route
-route.put('/user/user/update/description', //route
+//update user self description route
+route.put('/user/user/update/self/description', //route
 [mid.userMiddleware, mid.authMiddlweware.isActiveUser, upload.array()], //middleware
-userApiUserController.updateDescriptionUserUser); //controller
+userApiUserController.updateDescriptionUserSelfUser); //controller
 
-//update user status route
-route.put('/user/user/update/status', //route
+//update user self status route
+route.put('/user/user/update/self/status', //route
 [mid.userMiddleware, mid.authMiddlweware.isActiveUser, upload.array()], //middleware
-userApiUserController.updateStatusUserUser); //controller
+userApiUserController.updateStatusUserSelfUser); //controller
 
-//logout user route
-route.delete('/user/user/logout', //route
+//logout user self route
+route.delete('/user/user/logout/self', //route
 [mid.userMiddleware],  //middleware
-userApiUserController.logoutUserUser); //controller
+userApiUserController.logoutUserSelfUser); //controller
 
 module.exports = route;

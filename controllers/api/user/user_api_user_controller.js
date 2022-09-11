@@ -87,7 +87,7 @@ module.exports = {
             }
 
             //create obj for register
-            let obj = {
+            let userRegisterObj = {
                 username: req.body.username,
                 email: req.body.email,
                 password: passwordHash.generate(req.body.password),
@@ -100,7 +100,7 @@ module.exports = {
             }
 
             //insert user
-            let userRegister = await User.create(obj);
+            let userRegister = await User.create(userRegisterObj);
 
 
             if(userRegister){
@@ -151,7 +151,7 @@ module.exports = {
                 return;
             }
 
-            //check if email exist
+            //get user email
             let userEmail = await User.findOne({
                 where:{
                     email: req.body.email
@@ -171,7 +171,7 @@ module.exports = {
             }
 
             //check if account not user
-            if(!userEmail.role_user == 'User'){
+            if(userEmail.role_user != 'User'){
                 res.status(500).send(response(500,'account not user'));
                 return;
             }
@@ -198,11 +198,11 @@ module.exports = {
         }
     },
 
-    //get user profile self
-    getProfileSelfUserUser: async (req, res) => {
+    //get user self profile
+    getProfileUserSelfUser: async (req, res) => {
         try{
             //find user
-            let user = await User.findOne({
+            let userGet = await User.findOne({
                 where:{
                     id: data.id
                 },
@@ -219,7 +219,7 @@ module.exports = {
                     model: Skill,
                 }]
             });
-            res.status(200).send(response(200,'success', user));
+            res.status(200).send(response(200,'success', userGet));
         }catch(err){
             res.status(500).send(response(500,'internal server error',err));
             console.log(err);
@@ -231,7 +231,7 @@ module.exports = {
         try{
             const { limit, offset } = pagination(req.body.page - 1, req.body.size);
             //find all user
-            let users = await User.findAndCountAll({
+            let userGets = await User.findAndCountAll({
                 limit,
                 offset,
                 include: [{
@@ -248,10 +248,10 @@ module.exports = {
                 }]
             });
 
-            let totalpages = Math.floor(users.count / limit);
+            let totalPages = Math.floor(userGets.count / limit);
             let currentPage = req.body.page ? +req.body.page : 0;
 
-            res.status(200).send(responsePagination(200,'success get all data', users, totalpages, currentPage));
+            res.status(200).send(responsePagination(200,'success get all data', userGets, totalPages, currentPage));
         }catch(err){
             res.status(500).send(response(500,'internal server error',err));
             console.log(err);
@@ -264,7 +264,7 @@ module.exports = {
             let id = req.body.id;
 
             //find user by id
-            let user = await User.findOne({
+            let userGet = await User.findOne({
                 where:{
                     id: id
                 },
@@ -282,20 +282,20 @@ module.exports = {
                 }]
             });
 
-            if(!user){
+            if(!userGet){
                 res.status(500).send(response(500,'user not found'));
                 return;
             }
 
-            res.status(200).send(response(200,'success get by id', user));
+            res.status(200).send(response(200,'success get by id', userGet));
         }catch(err){
             res.status(500).send(response(500,'internal server error',err));
             console.log(err);
         }
     },
 
-    //upload user photo
-    uploadPhotoUserUser: async (req, res) => {
+    //upload user self photo
+    uploadPhotoUserSelfUser: async (req, res) => {
         try{
             //check format
             if(req.file.mimetype != 'image/jpeg' && req.file.mimetype != 'image/png'){
@@ -349,13 +349,13 @@ module.exports = {
             }); 
 
             //get data user after update
-            let userUpdate = await User.findOne({
+            let userAfterUpdate = await User.findOne({
                 where:{
                     id: data.id
                 }
             });
             
-            res.status(200).send(response(200,'photo uploaded', userUpdate));
+            res.status(200).send(response(200,'photo uploaded', userAfterUpdate));
 
         }catch(err){
             //delete photo if error
@@ -369,8 +369,8 @@ module.exports = {
         }
     },
 
-    //update user description
-    updateDescriptionUserUser: async (req, res) => {
+    //update user self description
+    updateDescriptionUserSelfUser: async (req, res) => {
         try{
             //check description longer than 2000 character
             if(req.body.description_user.length > 2000){
@@ -389,13 +389,13 @@ module.exports = {
             }); 
 
             //get data user after update
-            let userUpdate = await User.findOne({
+            let userAfterUpdate = await User.findOne({
                 where:{
                     id: data.id
                 }
             });
             
-            res.status(200).send(response(200,'description updated', userUpdate));
+            res.status(200).send(response(200,'description updated', userAfterUpdate));
 
         }catch(err){
             res.status(500).send(response(500,'internal server error',err));
@@ -403,8 +403,8 @@ module.exports = {
         }
     },
 
-    //update user status to not active
-    updateStatusUserUser: async (req, res) => {
+    //update user self status to not active
+    updateStatusUserSelfUser: async (req, res) => {
         try{        
             //update user status
             await User.update({
@@ -417,13 +417,13 @@ module.exports = {
             }); 
 
             //get data user after update
-            let userUpdate = await User.findOne({
+            let userAfterUpdate = await User.findOne({
                 where:{
                     id: data.id
                 }
             });
             
-            res.status(200).send(response(200,'status updated', userUpdate));
+            res.status(200).send(response(200,'status updated', userAfterUpdate));
 
         }catch(err){
             res.status(500).send(response(500,'internal server error',err));
@@ -431,8 +431,8 @@ module.exports = {
         }
     },
 
-    //logout user
-    logoutUserUser: async (req, res) => {
+    //logout user self
+    logoutUserSelfUser: async (req, res) => {
         try{
             //delete token
             let token = req.headers.authorization.split(' ')[1];
