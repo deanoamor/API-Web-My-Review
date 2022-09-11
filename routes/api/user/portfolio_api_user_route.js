@@ -12,29 +12,29 @@ const route = express.Router();
 const multer = require('multer');
 const upload = multer();
 
-//create portfolio route
-route.post('/user/portfolio/create', //route
+//create portfolio self route
+route.post('/user/portfolio/create/self', //route
 [mid.userMiddleware, mid.authMiddlweware.isActiveUser, upload.array()], //middleware
-portfolioApiUserController.createPortfoiloUser); //controller
+portfolioApiUserController.createPortfolioSelfUser); //controller
 
-//get portfolio route
-route.get('/user/portfolio/get', //route
+//get portfolio self route
+route.get('/user/portfolio/get/self', //route
 [mid.userMiddleware, mid.authMiddlweware.isActiveUser, upload.array()], //middleware
-portfolioApiUserController.getPortfolioUser); //controller
+portfolioApiUserController.getPortfolioSelfUser); //controller
 
-//get portfolio by id route
-route.get('/user/portfolio/get/id', //route
+//get portfolio self by id route
+route.get('/user/portfolio/get/self/id', //route
 [mid.userMiddleware, mid.authMiddlweware.isActiveUser, upload.array()], //middleware
-portfolioApiUserController.getPortfolioByIdUser); //controller
+portfolioApiUserController.getPortfolioSelfByIdUser); //controller
 
-//update portfolio route
-route.put('/user/portfolio/update', //route
+//update portfolio self route
+route.put('/user/portfolio/update/self', //route
 [mid.userMiddleware, mid.authMiddlweware.isActiveUser, upload.array()], //middleware
-portfolioApiUserController.updatePortfolioUser); //controller
+portfolioApiUserController.updatePortfolioSelfUser); //controller
 
-//delete portfolio route
-route.delete('/user/portfolio/delete', //route
+//delete portfolio self route
+route.delete('/user/portfolio/delete/self', //route
 [mid.userMiddleware, mid.authMiddlweware.isActiveUser, upload.array()], //middleware
-portfolioApiUserController.deletePortfolioUser); //controller
+portfolioApiUserController.deletePortfolioSelfUser); //controller
 
 module.exports = route;
