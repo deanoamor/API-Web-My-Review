@@ -14,7 +14,7 @@ const v = new Validator();
 
 module.exports = {
 
-    //create job user
+    //create job self user
     createJobSelfUser: async (req, res) => {
         try{
             //create schema
@@ -243,6 +243,7 @@ module.exports = {
             await Job.destroy({
                 where: {
                     id: req.body.id,
+                    users_id: data.id
                 }
             });
 
