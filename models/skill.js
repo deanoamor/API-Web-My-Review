@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Skill.init({
     users_id: DataTypes.BIGINT,
-    skill: DataTypes.STRING,
+    name_skill: DataTypes.STRING,
     description_skill: DataTypes.STRING(500)
   }, {
     sequelize,

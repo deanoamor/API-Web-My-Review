@@ -12,7 +12,7 @@ module.exports = {
         type: Sequelize.BIGINT,
         allowNull: false
       },
-      skill:{
+      name_skill:{
         type: Sequelize.STRING,
         allowNull: false
       },
