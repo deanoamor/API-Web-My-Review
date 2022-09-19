@@ -121,13 +121,13 @@ module.exports = {
                 }
             });
 
-            //check if portfolio is exist
+            //check if portfolio not found
             if(!portfolioCheck){
                 res.status(404).send(response(404,'portfolio not found'));
                 return;
             }
 
-            //check if user is owner
+            //check if user is not owner
             if(portfolioCheck.users_id != data.id){
                 res.status(403).send(response(403,'unauthorized, you are not owner of this portfolio'));
                 return;
@@ -195,13 +195,13 @@ module.exports = {
                 }
             });
 
-            //check if portfolio is exist
+            //check if portfolio not found
             if(!portfolioCheck){
                 res.status(404).send(response(404,'portfolio not found'));
                 return;
             }
 
-            //check if user is owner
+            //check if user is not owner
             if(portfolioCheck.users_id != data.id){
                 res.status(403).send(response(403,'unauthorized, you are not owner of this portfolio'));
                 return;
