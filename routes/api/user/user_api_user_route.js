@@ -32,8 +32,8 @@ route.get('/user/user/get/all', //route
 [mid.userMiddleware, mid.authMiddlweware.isActiveUser, upload.array()], //middleware
 userApiUserController.getProfileAllUserUser); //controller
 
-//get user self by id route
-route.get('/user/user/get/byid', //route
+//get user all by id route
+route.get('/user/user/get/all/id', //route
 [mid.userMiddleware, mid.authMiddlweware.isActiveUser, upload.array()], //middleware
 userApiUserController.getProfileByIdUserUser); //controller
 

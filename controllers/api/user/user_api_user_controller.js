@@ -229,7 +229,7 @@ module.exports = {
     //get user profile all 
     getProfileAllUserUser: async (req, res) => {
         try{
-            const { limit, offset } = pagination(req.body.page - 1, req.body.size);
+            let { limit, offset } = pagination(req.body.page - 1, req.body.size);
             //find all user
             let userGets = await User.findAndCountAll({
                 limit,
