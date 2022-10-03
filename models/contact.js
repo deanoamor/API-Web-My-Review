@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Contact.init({
+    users_id: DataTypes.BIGINT,
     name_contact: DataTypes.STRING,
     description_contact: DataTypes.STRING(500),
     link_contact: DataTypes.STRING
