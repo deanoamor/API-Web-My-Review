@@ -3,7 +3,7 @@ const { response, responsePagination } = require('../../../helpers/response_form
 const { pagination } = require('../../../helpers/pagination');
 
 //import models
-const {User, Token, Portfolio, Job, Contact, Skill} = require('../../../models');
+const {User, Token, Portfolio, Job, Contact, Skill, Review} = require('../../../models');
 
 //import config
 const baseConfig = require('../../../config/base_config');
@@ -217,6 +217,9 @@ module.exports = {
                 },
                 {
                     model: Skill,
+                },
+                {
+                    model: Review,
                 }]
             });
             res.status(200).send(response(200,'success', userGet));
@@ -245,6 +248,9 @@ module.exports = {
                 },
                 {
                     model: Skill,
+                },
+                {
+                    model: Review,
                 }]
             });
 
@@ -279,6 +285,9 @@ module.exports = {
                 },
                 {
                     model: Skill,
+                },
+                {
+                    model: Review,
                 }]
             });
 
