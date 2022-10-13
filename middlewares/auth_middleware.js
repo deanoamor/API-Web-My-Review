@@ -18,18 +18,18 @@ module.exports = {
         try{
             token = req.headers.authorization.split(' ')[1];
         }catch(err){
-            res.status(403).send(response(403,'unauthorized, theres something wrong with your token / settings'));
+            res.status(403).json(response(403,'unauthorized, theres something wrong with your token / settings'));
             return;
         }
 
         if(!token){
-            res.status(403).send(response(403,'unauthorized, token not found'));
+            res.status(403).json(response(403,'unauthorized, token not found'));
             return;
         }
 
         jwt.verify(token, baseConfig.auth_secret, (err, decoded) => {
             if(err){
-                res.status(403).send(response(403,'unauthorized, your token already expired or invalid'));
+                res.status(403).json(response(403,'unauthorized, your token already expired or invalid'));
                 return;
             }
 
@@ -50,7 +50,7 @@ module.exports = {
         })
 
         if(tokenCheck){
-            res.status(403).send(response(403,'unauthorized , you already logout'));
+            res.status(403).json(response(403,'unauthorized , you already logout'));
             return;
         }else{
             next();
@@ -61,7 +61,7 @@ module.exports = {
     isAdmin: async (req, res, next) => {
 
         if(data.role_user !== 'Admin'){
-            res.status(403).send(response(403,'unauthorized , youre not an admin'));
+            res.status(403).json(response(403,'unauthorized , youre not an admin'));
             return;
         }else{
             next();
@@ -71,7 +71,7 @@ module.exports = {
     isUser: async (req, res, next) => {
 
         if(data.role_user !== 'User'){
-            res.status(403).send(response(403,'unauthorized , youre not an user'));
+            res.status(403).json(response(403,'unauthorized , youre not an user'));
             return;
         }else{
             next();
@@ -87,12 +87,12 @@ module.exports = {
         });
 
         if(!user){
-            res.status(403).send(response(403,'user not found'));
+            res.status(403).json(response(403,'user not found'));
             return;
         }
 
         if(user.status_user !== 'Active'){
-            res.status(403).send(response(403,'user not active'));
+            res.status(403).json(response(403,'user not active'));
             return;
         }
 

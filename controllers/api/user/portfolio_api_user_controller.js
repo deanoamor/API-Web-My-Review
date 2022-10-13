@@ -42,7 +42,7 @@ module.exports = {
             //validate
             let validate = v.validate(portfolioCreateObj, schema);
             if(validate.length > 0){
-                res.status(500).send(response(500,'validation failed', validate));
+                res.status(500).json(response(500,'validation failed', validate));
                 return;
             }
 
@@ -50,10 +50,10 @@ module.exports = {
             let portfolioCreate = await Portfolio.create(portfolioCreateObj);
 
             //send response
-            res.status(200).send(response(200,'success create portfolio', portfolioCreate));
+            res.status(200).json(response(200,'success create portfolio', portfolioCreate));
 
         }catch(err){
-            res.status(500).send(response(500,'internal server error',err));
+            res.status(500).json(response(500,'internal server error',err));
             console.log(err);
         }
     },
@@ -77,9 +77,9 @@ module.exports = {
             let totalpages = Math.floor(portfolioGets.count / limit);
             let currentPage = req.body.page ? +req.body.page : 0;
 
-            res.status(200).send(responsePagination(200,'success get portfolio', portfolioGets, totalpages, currentPage));
+            res.status(200).json(responsePagination(200,'success get portfolio', portfolioGets, totalpages, currentPage));
         }catch(err){
-            res.status(500).send(response(500,'internal server error',err));
+            res.status(500).json(response(500,'internal server error',err));
             console.log(err);
         }
     },
@@ -99,13 +99,13 @@ module.exports = {
             });
 
             if(!portfolioGet){
-                res.status(404).send(response(404,'portfolio not found'));
+                res.status(404).json(response(404,'portfolio not found'));
                 return;
             }
 
-            res.status(200).send(response(200,'success get portfolio by id', portfolioGet));
+            res.status(200).json(response(200,'success get portfolio by id', portfolioGet));
         }catch(err){
-            res.status(500).send(response(500,'internal server error',err));
+            res.status(500).json(response(500,'internal server error',err));
             console.log(err);
         }
     },
@@ -123,13 +123,13 @@ module.exports = {
 
             //check if portfolio not found
             if(!portfolioCheck){
-                res.status(404).send(response(404,'portfolio not found'));
+                res.status(404).json(response(404,'portfolio not found'));
                 return;
             }
 
             //check if user is not owner
             if(portfolioCheck.users_id != data.id){
-                res.status(403).send(response(403,'unauthorized, you are not owner of this portfolio'));
+                res.status(403).json(response(403,'unauthorized, you are not owner of this portfolio'));
                 return;
             }
 
@@ -156,7 +156,7 @@ module.exports = {
             //validate
             let validate = v.validate(portfolioUpdateObj, schema);
             if(validate.length > 0){
-                res.status(500).send(response(500,'validation failed', validate));
+                res.status(500).json(response(500,'validation failed', validate));
                 return;
             }
 
@@ -177,9 +177,9 @@ module.exports = {
             });
 
             //send response
-            res.status(200).send(response(200,'success update portfolio', portfolioAfterUpdate));
+            res.status(200).json(response(200,'success update portfolio', portfolioAfterUpdate));
         }catch(err){
-            res.status(500).send(response(500,'internal server error',err));
+            res.status(500).json(response(500,'internal server error',err));
             console.log(err);
         }
     },
@@ -197,13 +197,13 @@ module.exports = {
 
             //check if portfolio not found
             if(!portfolioCheck){
-                res.status(404).send(response(404,'portfolio not found'));
+                res.status(404).json(response(404,'portfolio not found'));
                 return;
             }
 
             //check if user is not owner
             if(portfolioCheck.users_id != data.id){
-                res.status(403).send(response(403,'unauthorized, you are not owner of this portfolio'));
+                res.status(403).json(response(403,'unauthorized, you are not owner of this portfolio'));
                 return;
             }
             
@@ -216,9 +216,9 @@ module.exports = {
             });
 
             //send response
-            res.status(200).send(response(200,'success delete portfolio'));
+            res.status(200).json(response(200,'success delete portfolio'));
         }catch(err){
-            res.status(500).send(response(500,'internal server error',err));
+            res.status(500).json(response(500,'internal server error',err));
             console.log(err);
         }
     }

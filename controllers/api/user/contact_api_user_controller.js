@@ -40,7 +40,7 @@ module.exports = {
             //validation
             let validate = v.validate(contactCreateObj, schema);
             if(validate.length > 0){
-                res.status(500).send(response(500,'validation failed', validate));
+                res.status(500).json(response(500,'validation failed', validate));
                 return;
             }
 
@@ -48,10 +48,10 @@ module.exports = {
             let contactCreate = await Contact.create(contactCreateObj);
             
             //send response
-            res.status(200).send(response(200,'success create contact', contactCreate));
+            res.status(200).json(response(200,'success create contact', contactCreate));
 
         }catch(err){
-            res.status(500).send(response(500,'internal server error',err));
+            res.status(500).json(response(500,'internal server error',err));
             console.log(err);
         }
     },
@@ -78,9 +78,9 @@ module.exports = {
             let currentPage = req.body.page ? +req.body.page : 0;
 
             //send response
-            res.status(200).send(responsePagination(200,'success get contact user', contactGets, totalPages, currentPage));
+            res.status(200).json(responsePagination(200,'success get contact user', contactGets, totalPages, currentPage));
         }catch(err){
-            res.status(500).send(response(500,'internal server error',err));
+            res.status(500).json(response(500,'internal server error',err));
             console.log(err);
         }
     },
@@ -102,15 +102,15 @@ module.exports = {
 
             //check if contact not found
             if(!contactGet){
-                res.status(404).send(response(404,'contact not found'));
+                res.status(404).json(response(404,'contact not found'));
                 return;
             }
 
             //send response
-            res.status(200).send(response(200,'success get contact user', contactGet));
+            res.status(200).json(response(200,'success get contact user', contactGet));
 
         }catch(err){
-            res.status(500).send(response(500,'internal server error',err));
+            res.status(500).json(response(500,'internal server error',err));
             console.log(err);
         }
     },
@@ -128,13 +128,13 @@ module.exports = {
 
             //check if job not found
             if(!contactCheck){
-                res.status(404).send(response(404,'contact not found'));
+                res.status(404).json(response(404,'contact not found'));
                 return;
             }
 
             //check if user is not owner
             if(contactCheck.users_id != data.id){
-                res.status(403).send(response(403,'unauthorized, you are not owner of this contact'));
+                res.status(403).json(response(403,'unauthorized, you are not owner of this contact'));
                 return;
             }
 
@@ -161,7 +161,7 @@ module.exports = {
             //validation
             let validate = v.validate(contactUpdateObj, schema);
             if(validate.length > 0){
-                res.status(500).send(response(500,'validation failed', validate));
+                res.status(500).json(response(500,'validation failed', validate));
                 return;
             }
 
@@ -182,10 +182,10 @@ module.exports = {
             });
 
             //send response
-            res.status(200).send(response(200,'success update contact', contacAfterUpdate));
+            res.status(200).json(response(200,'success update contact', contacAfterUpdate));
             
         } catch (err) {
-            res.status(500).send(response(500,'internal server error',err));
+            res.status(500).json(response(500,'internal server error',err));
             console.log(err);
         }
     },
@@ -202,13 +202,13 @@ module.exports = {
 
             //check if contact not found
             if(!contactCheck){
-                res.status(404).send(response(404,'contact not found'));
+                res.status(404).json(response(404,'contact not found'));
                 return;
             }
 
             //check if user is not owner
             if(contactCheck.users_id != data.id){
-                res.status(403).send(response(403,'unauthorized, you are not owner of this contact'));
+                res.status(403).json(response(403,'unauthorized, you are not owner of this contact'));
                 return;
             }
 
@@ -221,9 +221,9 @@ module.exports = {
             });
 
             //send response
-            res.status(200).send(response(200,'success delete contact'));
+            res.status(200).json(response(200,'success delete contact'));
         }catch(err){
-            res.status(500).send(response(500,'internal server error',err));
+            res.status(500).json(response(500,'internal server error',err));
             console.log(err);
         }
     }

@@ -55,7 +55,7 @@ module.exports = {
             //validate
             let validate = v.validate(jobCreateObj, schema);
             if(validate.length > 0){
-                res.status(500).send(response(500,'validation failed', validate));
+                res.status(500).json(response(500,'validation failed', validate));
                 return;
             }
 
@@ -63,10 +63,10 @@ module.exports = {
             let jobCreate = await Job.create(jobCreateObj);
 
             //send response
-            res.status(200).send(response(200,'success create job', jobCreate));
+            res.status(200).json(response(200,'success create job', jobCreate));
             
         }catch(err){
-            res.status(500).send(response(500,'internal server error',err));
+            res.status(500).json(response(500,'internal server error',err));
             console.log(err);
         }
     },
@@ -93,9 +93,9 @@ module.exports = {
             let currentPage = req.body.page ? +req.body.page : 0;
 
             //send response
-            res.status(200).send(responsePagination(200,'success get job user', jobGets, totalPages, currentPage));
+            res.status(200).json(responsePagination(200,'success get job user', jobGets, totalPages, currentPage));
         }catch(err){
-            res.status(500).send(response(500,'internal server error',err));
+            res.status(500).json(response(500,'internal server error',err));
             console.log(err);
         }
     },
@@ -116,14 +116,14 @@ module.exports = {
 
             //check if job not found
             if(!jobGet){
-                res.status(404).send(response(404,'job not found'));
+                res.status(404).json(response(404,'job not found'));
                 return;
             }
 
             //send response
-            res.status(200).send(response(200,'success get job user', jobGet));
+            res.status(200).json(response(200,'success get job user', jobGet));
         }catch(err){
-            res.status(500).send(response(500,'internal server error',err));
+            res.status(500).json(response(500,'internal server error',err));
             console.log(err);
         }
     },
@@ -141,13 +141,13 @@ module.exports = {
 
             //check if job not found
             if(!jobCheck){
-                res.status(404).send(response(404,'job not found'));
+                res.status(404).json(response(404,'job not found'));
                 return;
             }
 
             //check if user is not owner
             if(jobCheck.users_id != data.id){
-                res.status(403).send(response(403,'unauthorized, you are not owner of this job'));
+                res.status(403).json(response(403,'unauthorized, you are not owner of this job'));
                 return;
             }
 
@@ -188,7 +188,7 @@ module.exports = {
             //validate
             let validate = v.validate(jobUpdateObj, schema);
             if(validate.length > 0){
-                res.status(500).send(response(500,'validation failed', validate));
+                res.status(500).json(response(500,'validation failed', validate));
                 return;
             }
 
@@ -209,10 +209,10 @@ module.exports = {
             });
 
             //send response
-            res.status(200).send(response(200,'success update job', jobAfterUpdate));
+            res.status(200).json(response(200,'success update job', jobAfterUpdate));
 
         }catch(err){
-            res.status(500).send(response(500,'internal server error',err));
+            res.status(500).json(response(500,'internal server error',err));
             console.log(err);
         }
     },
@@ -229,13 +229,13 @@ module.exports = {
 
             //check if job not found
             if(!jobCheck){
-                res.status(404).send(response(404,'job not found'));
+                res.status(404).json(response(404,'job not found'));
                 return;
             }
 
             //check if user is not owner
             if(jobCheck.users_id != data.id){
-                res.status(403).send(response(403,'unauthorized, you are not owner of this job'));
+                res.status(403).json(response(403,'unauthorized, you are not owner of this job'));
                 return;
             }
 
@@ -248,10 +248,10 @@ module.exports = {
             });
 
             //send response
-            res.status(200).send(response(200,'success delete job'));
+            res.status(200).json(response(200,'success delete job'));
 
         }catch(err){
-            res.status(500).send(response(500,'internal server error',err));
+            res.status(500).json(response(500,'internal server error',err));
             console.log(err);
         }
     }
