@@ -60,7 +60,7 @@ module.exports = {
                 gender: req.body.gender
             }, schema);
             if(validate.length > 0){
-                res.status(500).send(response(500,'validation failed', validate));
+                res.status(500).json(response(500,'validation failed', validate));
                 return;
             }
 
@@ -71,7 +71,7 @@ module.exports = {
                 }
             });
             if(userEmail){
-                res.status(500).send(response(500,'email already exist'));
+                res.status(500).json(response(500,'email already exist'));
                 return;
             }
 
@@ -82,7 +82,7 @@ module.exports = {
                 }
             });
             if(userName){   
-                res.status(500).send(response(500,'username already exist'));
+                res.status(500).json(response(500,'username already exist'));
                 return;
             }
 
@@ -114,10 +114,10 @@ module.exports = {
                 sendEmail(userRegister.email,'Verify your email','verified_user_email_email', emailData); //sendEmail(email destination,subject email,html file,data)
             }
             
-            res.status(200).send(response(200,'success', userRegister));
+            res.status(200).json(response(200,'success', userRegister));
 
         }catch(err){
-            res.status(500).send(response(500,'internal server error',err));
+            res.status(500).json(response(500,'internal server error',err));
             console.log(err);
         }
     },
@@ -147,7 +147,7 @@ module.exports = {
             }, schema);
 
             if(validate.length > 0){
-                res.status(500).send(response(500,'validation failed', validate));
+                res.status(500).json(response(500,'validation failed', validate));
                 return;
             }
 
@@ -160,25 +160,25 @@ module.exports = {
 
             //check if email not exist
             if(!userEmail){
-                res.status(500).send(response(500,'email not found'));
+                res.status(500).json(response(500,'email not found'));
                 return;
             }
 
             //check user verified
             if(userEmail.is_verified == false){
-                res.status(500).send(response(500,'email not verified'));
+                res.status(500).json(response(500,'email not verified'));
                 return;
             }
 
             //check if account not user
             if(userEmail.role_user != 'User'){
-                res.status(500).send(response(500,'account not user'));
+                res.status(500).json(response(500,'account not user'));
                 return;
             }
 
             //check password
             if(!passwordHash.verify(password, userEmail.password)){
-                res.status(500).send(response(500,'password not match'));
+                res.status(500).json(response(500,'password not match'));
                 return;
             }
             
@@ -191,9 +191,9 @@ module.exports = {
             });
             
 
-            res.status(200).send(response(200,'Login success', token));
+            res.status(200).json(response(200,'Login success', token));
         }catch(err){
-            res.status(500).send(response(500,'internal server error',err));
+            res.status(500).json(response(500,'internal server error',err));
             console.log(err);
         }
     },
@@ -222,9 +222,9 @@ module.exports = {
                     model: Review,
                 }]
             });
-            res.status(200).send(response(200,'success', userGet));
+            res.status(200).json(response(200,'success', userGet));
         }catch(err){
-            res.status(500).send(response(500,'internal server error',err));
+            res.status(500).json(response(500,'internal server error',err));
             console.log(err);
         }
     },
@@ -257,9 +257,9 @@ module.exports = {
             let totalPages = Math.floor(userGets.count / limit);
             let currentPage = req.body.page ? +req.body.page : 0;
 
-            res.status(200).send(responsePagination(200,'success get all data', userGets, totalPages, currentPage));
+            res.status(200).json(responsePagination(200,'success get all data', userGets, totalPages, currentPage));
         }catch(err){
-            res.status(500).send(response(500,'internal server error',err));
+            res.status(500).json(response(500,'internal server error',err));
             console.log(err);
         }
     },
@@ -296,9 +296,9 @@ module.exports = {
                 return;
             }
 
-            res.status(200).send(response(200,'success get by id', userGet));
+            res.status(200).json(response(200,'success get by id', userGet));
         }catch(err){
-            res.status(500).send(response(500,'internal server error',err));
+            res.status(500).json(response(500,'internal server error',err));
             console.log(err);
         }
     },
@@ -308,13 +308,13 @@ module.exports = {
         try{
             //check format
             if(req.file.mimetype != 'image/jpeg' && req.file.mimetype != 'image/png'){
-                res.status(500).send(response(500,'format not supported'));
+                res.status(500).json(response(500,'format not supported'));
                 return
             }
 
             //check file size
             if(req.file.size > 1000000){
-                res.status(500).send(response(500,'file size too big'));
+                res.status(500).json(response(500,'file size too big'));
                 return
             }
 
@@ -329,7 +329,7 @@ module.exports = {
 
             //check if user doesnt update
             if(fileName == oldestFileName.image_name_user){
-                res.status(500).send(response(500,'image not updated'));
+                res.status(500).json(response(500,'image not updated'));
                 return
             }
 
@@ -341,7 +341,7 @@ module.exports = {
             //insert file to public folder
             fs.writeFileSync(`public/image/user/${fileName}`, req.file.buffer, (err) => {
                 if(err){
-                    res.status(500).send(response(500,'internal server error',err));
+                    res.status(500).json(response(500,'internal server error',err));
                     return
                 }
             }); 
@@ -364,7 +364,7 @@ module.exports = {
                 }
             });
             
-            res.status(200).send(response(200,'photo uploaded', userAfterUpdate));
+            res.status(200).json(response(200,'photo uploaded', userAfterUpdate));
 
         }catch(err){
             //delete photo if error
@@ -373,7 +373,7 @@ module.exports = {
                 fs.unlinkSync(`public/image/user/${fileName}`);
             }
             
-            res.status(500).send(response(500,'internal server error',err));
+            res.status(500).json(response(500,'internal server error',err));
             console.log(err);
         }
     },
@@ -383,7 +383,7 @@ module.exports = {
         try{
             //check description longer than 2000 character
             if(req.body.description_user.length > 2000){
-                res.status(500).send(response(500,'description too long'));
+                res.status(500).json(response(500,'description too long'));
                 return
             }
             
@@ -404,10 +404,10 @@ module.exports = {
                 }
             });
             
-            res.status(200).send(response(200,'description updated', userAfterUpdate));
+            res.status(200).json(response(200,'description updated', userAfterUpdate));
 
         }catch(err){
-            res.status(500).send(response(500,'internal server error',err));
+            res.status(500).json(response(500,'internal server error',err));
             console.log(err);
         }
     },
@@ -432,10 +432,10 @@ module.exports = {
                 }
             });
             
-            res.status(200).send(response(200,'status updated', userAfterUpdate));
+            res.status(200).json(response(200,'status updated', userAfterUpdate));
 
         }catch(err){
-            res.status(500).send(response(500,'internal server error',err));
+            res.status(500).json(response(500,'internal server error',err));
             console.log(err);
         }
     },
@@ -450,9 +450,9 @@ module.exports = {
                 users_id: data.id,
                 token: token
             });
-            res.status(200).send(response(200,'token deleted', tokenInsert));
+            res.status(200).json(response(200,'token deleted', tokenInsert));
         }catch(err){
-            res.status(500).send(response(500,'internal server error',err));
+            res.status(500).json(response(500,'internal server error',err));
             console.log(err);
         }
     }
