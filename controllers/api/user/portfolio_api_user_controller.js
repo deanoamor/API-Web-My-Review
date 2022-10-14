@@ -77,6 +77,7 @@ module.exports = {
             let totalpages = Math.floor(portfolioGets.count / limit);
             let currentPage = req.body.page ? +req.body.page : 0;
 
+            //send response
             res.status(200).json(responsePagination(200,'success get portfolio', portfolioGets, totalpages, currentPage));
         }catch(err){
             res.status(500).json(response(500,'internal server error',err));
@@ -103,6 +104,7 @@ module.exports = {
                 return;
             }
 
+            //send response
             res.status(200).json(response(200,'success get portfolio by id', portfolioGet));
         }catch(err){
             res.status(500).json(response(500,'internal server error',err));
@@ -133,8 +135,8 @@ module.exports = {
                 return;
             }
 
-             //create schema
-             const schema = {
+            //create schema
+            const schema = {
                 name_portfolio: { 
                     type: "string", 
                     min: 3, 

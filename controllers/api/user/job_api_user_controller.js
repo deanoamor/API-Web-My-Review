@@ -152,7 +152,7 @@ module.exports = {
             }
 
              //create schema
-             const schema = {
+            const schema = {
                 name_job: {
                     type: "string",
                     min: 3,

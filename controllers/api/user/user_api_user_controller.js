@@ -114,6 +114,7 @@ module.exports = {
                 sendEmail(userRegister.email,'Verify your email','verified_user_email_email', emailData); //sendEmail(email destination,subject email,html file,data)
             }
             
+            //send response
             res.status(200).json(response(200,'success', userRegister));
 
         }catch(err){
@@ -190,7 +191,7 @@ module.exports = {
                 expiresIn: 86400 // expires in 24 hours
             });
             
-
+            //send response
             res.status(200).json(response(200,'Login success', token));
         }catch(err){
             res.status(500).json(response(500,'internal server error',err));
@@ -222,6 +223,8 @@ module.exports = {
                     model: Review,
                 }]
             });
+
+            //send response
             res.status(200).json(response(200,'success', userGet));
         }catch(err){
             res.status(500).json(response(500,'internal server error',err));
@@ -257,6 +260,7 @@ module.exports = {
             let totalPages = Math.floor(userGets.count / limit);
             let currentPage = req.body.page ? +req.body.page : 0;
 
+            //send response
             res.status(200).json(responsePagination(200,'success get all data', userGets, totalPages, currentPage));
         }catch(err){
             res.status(500).json(response(500,'internal server error',err));
@@ -264,7 +268,7 @@ module.exports = {
         }
     },
 
-    //get user profile by id
+    //get user profile other by id
     getProfileByIdUserUser: async (req, res) => {
         try{
             let id = req.body.id;
@@ -292,10 +296,11 @@ module.exports = {
             });
 
             if(!userGet){
-                res.status(500).send(response(500,'user not found'));
+                res.status(500).json(response(500,'user not found'));
                 return;
             }
 
+            //send response
             res.status(200).json(response(200,'success get by id', userGet));
         }catch(err){
             res.status(500).json(response(500,'internal server error',err));
@@ -364,6 +369,7 @@ module.exports = {
                 }
             });
             
+            //send response
             res.status(200).json(response(200,'photo uploaded', userAfterUpdate));
 
         }catch(err){
@@ -404,6 +410,7 @@ module.exports = {
                 }
             });
             
+            //send response
             res.status(200).json(response(200,'description updated', userAfterUpdate));
 
         }catch(err){
@@ -432,6 +439,7 @@ module.exports = {
                 }
             });
             
+            //send response
             res.status(200).json(response(200,'status updated', userAfterUpdate));
 
         }catch(err){
@@ -450,6 +458,8 @@ module.exports = {
                 users_id: data.id,
                 token: token
             });
+
+            //send response
             res.status(200).json(response(200,'token deleted', tokenInsert));
         }catch(err){
             res.status(500).json(response(500,'internal server error',err));
