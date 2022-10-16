@@ -1,7 +1,7 @@
 # Web-My-Review
 
 ## About Project
-Backend API project from Web-My-Review. 
+Backend Rest API project from Web-My-Review. 
 
 ## Tech stack
 - NodeJS.
