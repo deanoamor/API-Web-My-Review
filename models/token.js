@@ -16,10 +16,16 @@ module.exports = (sequelize, DataTypes) => {
       Token.belongsTo(models.User, {
         foreignKey: 'users_id',
       });
+
+      //admin
+      Token.belongsTo(models.Admin, {
+        foreignKey: 'admins_id',
+      });
     }
   }
   Token.init({
     users_id: DataTypes.BIGINT,
+    admins_id: DataTypes.BIGINT,
     token: DataTypes.STRING
   }, {
     sequelize,
