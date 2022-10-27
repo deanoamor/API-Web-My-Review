@@ -9,7 +9,7 @@ module.exports = {
       adminname: 'admin1',
       email: 'admin1@gmail.com',
       password: passwordHash.generate('admin1password'),
-      role_admin: 'Admin',
+      role_admin: 'SuperAdmin',
       status_admin: 'Active',
       createdAt: new Date(),
       updatedAt: new Date()
