@@ -172,8 +172,14 @@ module.exports = {
             }
 
             //check if account not user
-            if(userEmail.role_user != 'User'){
+            if(userEmail.role_user !== 'User'){
                 res.status(500).json(response(500,'account not user'));
+                return;
+            }
+
+            //check if account not active
+            if(userEmail.status_user !== 'Active'){
+                res.status(500).json(response(500,'account not active'));
                 return;
             }
 
@@ -431,6 +437,15 @@ module.exports = {
                     id: data.id
                 }
             }); 
+
+            //get token
+            let token = req.headers.authorization.split(' ')[1];
+            
+            //insert token to token table
+            await Token.create({
+                users_id: data.id,
+                token: token
+            });
 
             //get data user after update
             let userAfterUpdate = await User.findOne({

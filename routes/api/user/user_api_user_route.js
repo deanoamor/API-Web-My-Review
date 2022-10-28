@@ -24,32 +24,32 @@ userApiUserController.loginUserUser); //controller
 
 //get user self route
 route.get('/user/user/get/self', //route
-[mid.userMiddleware, mid.authMiddlweware.isActiveUser], //middleware
+[mid.userMiddleware], //middleware
 userApiUserController.getProfileUserSelfUser); //controller
 
 //get user all route
 route.get('/user/user/get/all', //route
-[mid.userMiddleware, mid.authMiddlweware.isActiveUser, upload.array()], //middleware
+[mid.userMiddleware, upload.array()], //middleware
 userApiUserController.getProfileAllUserUser); //controller
 
 //get user all by id route
 route.get('/user/user/get/all/id', //route
-[mid.userMiddleware, mid.authMiddlweware.isActiveUser, upload.array()], //middleware
+[mid.userMiddleware, upload.array()], //middleware
 userApiUserController.getProfileByIdUserUser); //controller
 
 //update user self photo route
 route.put('/user/user/update/self/photo', //route
-[mid.userMiddleware ,mid.authMiddlweware.isActiveUser, upload.single('image_name_user')], //middleware
+[mid.userMiddleware , upload.single('image_name_user')], //middleware
 userApiUserController.uploadPhotoUserSelfUser); //controller
 
 //update user self description route
 route.put('/user/user/update/self/description', //route
-[mid.userMiddleware, mid.authMiddlweware.isActiveUser, upload.array()], //middleware
+[mid.userMiddleware, upload.array()], //middleware
 userApiUserController.updateDescriptionUserSelfUser); //controller
 
 //update user self status route
 route.put('/user/user/update/self/status', //route
-[mid.userMiddleware, mid.authMiddlweware.isActiveUser, upload.array()], //middleware
+[mid.userMiddleware], //middleware
 userApiUserController.updateStatusUserSelfUser); //controller
 
 //logout user self route
