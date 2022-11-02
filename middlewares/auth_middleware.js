@@ -7,6 +7,7 @@ const { response } = require('../helpers/response_formatter');
 //import model
 const { Token } = require('../models');
 const { User } = require('../models');
+const { Admin } = require('../models');
 
 //import jwt token
 const jwt = require('jsonwebtoken');
@@ -58,10 +59,19 @@ module.exports = {
         
     },
 
-    isAdmin: async (req, res, next) => {
+    isAdminSuperAdmin: async (req, res, next) => {
 
-        if(data.role_user !== 'Admin'){
-            res.status(403).json(response(403,'unauthorized , youre not an admin'));
+        if(data.role_admin == 'Admin' || data.role_admin == 'SuperAdmin'){
+            next();
+        }else{
+            res.status(403).json(response(403,'unauthorized , youre not an admin or superadmin'));
+            return;
+        }
+    },
+
+    isSuperAdmin : async (req, res, next) => {
+        if(data.role_admin != 'SuperAdmin'){
+            res.status(403).json(response(403,'unauthorized , youre not an superadmin'));
             return;
         }else{
             next();
@@ -70,7 +80,7 @@ module.exports = {
 
     isUser: async (req, res, next) => {
 
-        if(data.role_user !== 'User'){
+        if(data.role_user != 'User'){
             res.status(403).json(response(403,'unauthorized , youre not an user'));
             return;
         }else{
@@ -97,5 +107,29 @@ module.exports = {
         }
 
         next();
-    }
+    },
+
+    isActiveAdmin: async (req, res, next) => {
+
+        if(data.role_admin == 'Admin'){
+            let admin = await Admin.findOne({
+                where:{
+                    id: data.id,
+                    role_admin: 'Admin'
+                }
+            });
+    
+            if(!admin){
+                res.status(403).json(response(403,'admin not found'));
+                return;
+            }
+    
+            if(admin.status_admin !== 'Active'){
+                res.status(403).json(response(403,'admin not active'));
+                return;
+            }
+        }
+
+        next();
+    },
 }
