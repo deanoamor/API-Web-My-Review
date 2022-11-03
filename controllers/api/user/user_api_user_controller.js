@@ -60,7 +60,7 @@ module.exports = {
                 gender: req.body.gender
             }, schema);
             if(validate.length > 0){
-                res.status(500).json(response(500,'validation failed', validate));
+                res.status(400).json(response(400,'validation failed', validate));
                 return;
             }
 
@@ -71,7 +71,7 @@ module.exports = {
                 }
             });
             if(userEmail){
-                res.status(500).json(response(500,'email already exist'));
+                res.status(409).json(response(409,'email already exist'));
                 return;
             }
 
@@ -82,7 +82,7 @@ module.exports = {
                 }
             });
             if(userName){   
-                res.status(500).json(response(500,'username already exist'));
+                res.status(409).json(response(409,'username already exist'));
                 return;
             }
 
@@ -115,7 +115,7 @@ module.exports = {
             }
             
             //send response
-            res.status(200).json(response(200,'success', userRegister));
+            res.status(201).json(response(201,'success', userRegister));
 
         }catch(err){
             res.status(500).json(response(500,'internal server error',err));
@@ -148,7 +148,7 @@ module.exports = {
             }, schema);
 
             if(validate.length > 0){
-                res.status(500).json(response(500,'validation failed', validate));
+                res.status(400).json(response(400,'validation failed', validate));
                 return;
             }
 
@@ -161,31 +161,31 @@ module.exports = {
 
             //check if email not exist
             if(!userEmail){
-                res.status(500).json(response(500,'email not found'));
+                res.status(404).json(response(404,'email not found'));
                 return;
             }
 
             //check user verified
             if(userEmail.is_verified == false){
-                res.status(500).json(response(500,'email not verified'));
+                res.status(403).json(response(403,'email not verified'));
                 return;
             }
 
             //check if account not user
             if(userEmail.role_user !== 'User'){
-                res.status(500).json(response(500,'account not user'));
+                res.status(403).json(response(403,'account not user'));
                 return;
             }
 
             //check if account not active
             if(userEmail.status_user !== 'Active'){
-                res.status(500).json(response(500,'account not active'));
+                res.status(403).json(response(403,'account not active'));
                 return;
             }
 
             //check password
             if(!passwordHash.verify(password, userEmail.password)){
-                res.status(500).json(response(500,'password not match'));
+                res.status(403).json(response(403,'password wrong'));
                 return;
             }
             
@@ -302,7 +302,7 @@ module.exports = {
             });
 
             if(!userGet){
-                res.status(500).json(response(500,'user not found'));
+                res.status(404).json(response(404,'user not found'));
                 return;
             }
 
@@ -319,13 +319,13 @@ module.exports = {
         try{
             //check format
             if(req.file.mimetype != 'image/jpeg' && req.file.mimetype != 'image/png'){
-                res.status(500).json(response(500,'format not supported'));
+                res.status(400).json(response(400,'format not supported'));
                 return
             }
 
             //check file size
             if(req.file.size > 1000000){
-                res.status(500).json(response(500,'file size too big'));
+                res.status(400).json(response(400,'file size too big'));
                 return
             }
 
@@ -340,7 +340,7 @@ module.exports = {
 
             //check if user doesnt update
             if(fileName == oldestFileName.image_name_user){
-                res.status(500).json(response(500,'image not updated'));
+                res.status(200).json(response(200,'image not updated'));
                 return
             }
 
@@ -395,7 +395,7 @@ module.exports = {
         try{
             //check description longer than 2000 character
             if(req.body.description_user.length > 2000){
-                res.status(500).json(response(500,'description too long'));
+                res.status(400).json(response(400,'description too long'));
                 return
             }
             

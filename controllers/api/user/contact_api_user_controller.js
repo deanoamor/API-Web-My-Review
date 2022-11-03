@@ -40,7 +40,7 @@ module.exports = {
             //validation
             let validate = v.validate(contactCreateObj, schema);
             if(validate.length > 0){
-                res.status(500).json(response(500,'validation failed', validate));
+                res.status(400).json(response(400,'validation failed', validate));
                 return;
             }
 
@@ -48,7 +48,7 @@ module.exports = {
             let contactCreate = await Contact.create(contactCreateObj);
             
             //send response
-            res.status(200).json(response(200,'success create contact', contactCreate));
+            res.status(201).json(response(201,'success create contact', contactCreate));
 
         }catch(err){
             res.status(500).json(response(500,'internal server error',err));
@@ -161,7 +161,7 @@ module.exports = {
             //validation
             let validate = v.validate(contactUpdateObj, schema);
             if(validate.length > 0){
-                res.status(500).json(response(500,'validation failed', validate));
+                res.status(400).json(response(400,'validation failed', validate));
                 return;
             }
 

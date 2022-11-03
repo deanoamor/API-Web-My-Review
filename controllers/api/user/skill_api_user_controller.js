@@ -35,7 +35,7 @@ module.exports = {
             //validation
             let validate = v.validate(skillCreateObj, schema);
             if(validate.length > 0){
-                res.status(500).json(response(500,'validation failed', validate));
+                res.status(400).json(response(400,'validation failed', validate));
                 return;
             }
 
@@ -43,7 +43,7 @@ module.exports = {
             let skillCreate = await Skill.create(skillCreateObj);
 
             //send response
-            res.status(200).json(response(200,'success create skill', skillCreate));
+            res.status(201).json(response(201,'success create skill', skillCreate));
 
         }catch(err){
             res.status(500).json(response(500,'internal server error',err));
@@ -148,7 +148,7 @@ module.exports = {
             //validation
             let validate = v.validate(skillUpdateObj, schema);
             if(validate.length > 0){
-                res.status(500).json(response(500,'validation failed', validate));
+                res.status(400).json(response(400,'validation failed', validate));
                 return;
             }
 

@@ -48,7 +48,7 @@ module.exports = {
                 password: req.body.password,
             }, schema);
             if(validate.length > 0){
-                res.status(500).json(response(500,'validation failed', validate));
+                res.status(400).json(response(400,'validation failed', validate));
                 return;
             }
 
@@ -59,7 +59,7 @@ module.exports = {
                 }
             });
             if(adminEmail){
-                res.status(500).json(response(500,'email admin already exist'));
+                res.status(409).json(response(409,'email admin already exist'));
                 return;
             }
 
@@ -70,7 +70,7 @@ module.exports = {
                 }
             });
             if(adminName){
-                res.status(500).json(response(500,'adminname already exist'));
+                res.status(409).json(response(409,'adminname already exist'));
                 return;
             }
 
@@ -87,7 +87,7 @@ module.exports = {
             let adminCreate = await Admin.create(adminCreateObj);
             
             //send response
-            res.status(200).json(response(200,'success create admin', adminCreate));
+            res.status(201).json(response(201,'success create admin', adminCreate));
 
         }catch(err){
             res.status(500).json(response(500,'internal server error',err));
@@ -108,7 +108,7 @@ module.exports = {
             
             //check if admin not exist
             if(!adminGet){
-                res.status(500).json(response(500,'admin not found'));
+                res.status(404).json(response(404,'admin not found'));
                 return;
             }
 
@@ -185,7 +185,7 @@ module.exports = {
                 password: password,
             }, schema);
             if(validate.length > 0){
-                res.status(500).json(response(500,'validation failed', validate));
+                res.status(400).json(response(400,'validation failed', validate));
                 return;
             }
 
@@ -198,25 +198,25 @@ module.exports = {
 
             //check if email not exist
             if(!adminEmail){
-                res.status(500).json(response(500,'email not found'));
+                res.status(404).json(response(404,'email not found'));
                 return;
             }
 
             //check if account not admin
             if(adminEmail.role_admin == 'User'){
-                res.status(500).json(response(500,'you are not admin or super admin'));
+                res.status(403).json(response(403,'you are not admin or super admin'));
                 return;
             }
 
             //check if account not active
             if(adminEmail.status_admin !== 'Active'){
-                res.status(500).json(response(500,'account not active'));
+                res.status(403).json(response(403,'account not active'));
                 return;
             }
 
             //check password
             if(!passwordHash.verify(password, adminEmail.password)){
-                res.status(500).json(response(500,'password not match'));
+                res.status(403).json(response(403,'password wrong'));
                 return;
             }
 

@@ -42,7 +42,7 @@ module.exports = {
             //validate
             let validate = v.validate(portfolioCreateObj, schema);
             if(validate.length > 0){
-                res.status(500).json(response(500,'validation failed', validate));
+                res.status(400).json(response(400,'validation failed', validate));
                 return;
             }
 
@@ -50,7 +50,7 @@ module.exports = {
             let portfolioCreate = await Portfolio.create(portfolioCreateObj);
 
             //send response
-            res.status(200).json(response(200,'success create portfolio', portfolioCreate));
+            res.status(201).json(response(201,'success create portfolio', portfolioCreate));
 
         }catch(err){
             res.status(500).json(response(500,'internal server error',err));
@@ -158,7 +158,7 @@ module.exports = {
             //validate
             let validate = v.validate(portfolioUpdateObj, schema);
             if(validate.length > 0){
-                res.status(500).json(response(500,'validation failed', validate));
+                res.status(400).json(response(400,'validation failed', validate));
                 return;
             }
 

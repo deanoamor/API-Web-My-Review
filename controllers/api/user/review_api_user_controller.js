@@ -26,7 +26,7 @@ module.exports = {
 
              //check if users_id not found
             if(!reviewCheckUserId){
-                res.status(500).json(response(500,'users_id not found'));
+                res.status(404).json(response(404,'users_id not found'));
                 return;
             };
 
@@ -41,13 +41,13 @@ module.exports = {
 
                 //check if skills_id not found
                 if(!reviewCheckSkillsId){
-                    res.status(500).json(response(500,'skills_id not found'));
+                    res.status(404).json(response(404,'skills_id not found'));
                     return;
                 };
 
                 //check if skills_id owner not same with users_id
                 if(reviewCheckSkillsId.users_id != req.body.users_id){
-                    res.status(500).json(response(500,'skills_id owner not same with users_id'));
+                    res.status(403).json(response(403,'skills_id owner not same with users_id'));
                     return;
                 };
             };
@@ -84,7 +84,7 @@ module.exports = {
             //validate
             let validate = v.validate(reviewCreateObj, schema);
             if(validate.length > 0){
-                res.status(500).json(response(500,'validation failed', validate));
+                res.status(400).json(response(400,'validation failed', validate));
                 return;
             };
 
@@ -92,7 +92,7 @@ module.exports = {
             let reviewCreate = await Review.create(reviewCreateObj);
 
             //send response
-            res.status(200).json(response(200,'success create review', reviewCreate));
+            res.status(201).json(response(201,'success create review', reviewCreate));
 
         }catch(err){
             res.status(500).json(response(500,'internal server error',err));
@@ -124,7 +124,7 @@ module.exports = {
 
             //check if data review 0
             if(reviewOtherGets.count == 0){
-                res.status(500).json(response(500,'review not found'));
+                res.status(404).json(response(500,'review not found'));
                 return;
             }
 
@@ -161,7 +161,7 @@ module.exports = {
 
             //check if review not found
             if(!reviewOtherGet){
-                res.status(500).json(response(500,'review not found'));
+                res.status(404).json(response(404,'review not found'));
                 return;
             }
 
@@ -198,7 +198,7 @@ module.exports = {
 
             //check if data review 0
             if(reviewSelfGets.count == 0){
-                res.status(500).json(response(500,'review not found'));
+                res.status(404).json(response(404,'review not found'));
                 return;
             }
 
@@ -235,7 +235,7 @@ module.exports = {
 
             //check if review not found
             if(!reviewSelfGet){
-                res.status(500).json(response(500,'review not found'));
+                res.status(404).json(response(404,'review not found'));
                 return;
             }
 
@@ -293,7 +293,7 @@ module.exports = {
             //validate
             let validate = v.validate(reviewUpdateObj, schema);
             if(validate.length > 0){
-                res.status(500).json(response(500,'validation failed', validate));
+                res.status(400).json(response(400,'validation failed', validate));
                 return;
             }
 
@@ -368,7 +368,7 @@ module.exports = {
             //validate
             let validate = v.validate(reviewStatusUpdateObj, schema);
             if(validate.length > 0){
-                res.status(500).json(response(500,'validation failed', validate));
+                res.status(400).json(response(400,'validation failed', validate));
                 return;
             };
 

@@ -55,7 +55,7 @@ module.exports = {
             //validate
             let validate = v.validate(jobCreateObj, schema);
             if(validate.length > 0){
-                res.status(500).json(response(500,'validation failed', validate));
+                res.status(400).json(response(400,'validation failed', validate));
                 return;
             }
 
@@ -63,7 +63,7 @@ module.exports = {
             let jobCreate = await Job.create(jobCreateObj);
 
             //send response
-            res.status(200).json(response(200,'success create job', jobCreate));
+            res.status(201).json(response(201,'success create job', jobCreate));
             
         }catch(err){
             res.status(500).json(response(500,'internal server error',err));
@@ -188,7 +188,7 @@ module.exports = {
             //validate
             let validate = v.validate(jobUpdateObj, schema);
             if(validate.length > 0){
-                res.status(500).json(response(500,'validation failed', validate));
+                res.status(400).json(response(400,'validation failed', validate));
                 return;
             }
 
