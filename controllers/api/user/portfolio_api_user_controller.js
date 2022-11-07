@@ -14,7 +14,7 @@ const v = new Validator();
 
 module.exports = {
 
-    //create portfolio self user
+    //create portfolio self 
     createPortfolioSelfUser: async (req, res) => {
         try{
 
@@ -58,7 +58,7 @@ module.exports = {
         }
     },
 
-    //get portfolio self user
+    //get portfolio self 
     getPortfolioSelfUser: async (req, res) => {
         try{
             let { limit, offset } = pagination(req.body.page - 1, req.body.size);
@@ -85,7 +85,7 @@ module.exports = {
         }
     },
 
-    //get portfolio self by id user
+    //get portfolio self by id 
     getPortfolioSelfByIdUser: async (req, res) => {
         try{
             //get portfolio by id
@@ -112,7 +112,7 @@ module.exports = {
         }
     },
 
-    //update portfolio self user
+    //update portfolio self 
     updatePortfolioSelfUser: async (req, res) => {
         try{
 
@@ -186,7 +186,7 @@ module.exports = {
         }
     },
 
-    //delete portfolio self user
+    //delete portfolio self 
     deletePortfolioSelfUser: async (req, res) => {
         try{
 

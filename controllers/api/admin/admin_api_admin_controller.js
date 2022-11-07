@@ -21,7 +21,7 @@ const v = new Validator();
 module.exports = {
 
     //superadmin
-    //create admin other admin
+    //create admin other
     createAdminOtherAdmin: async (req, res) => {
         try{
             //create schema
@@ -95,7 +95,7 @@ module.exports = {
         }
     },
 
-    //update admin status other from not active to active admin
+    //update admin other status from not active to active
     updateStatusAdminOtherAdmin: async (req, res) => {
         try{
 
@@ -136,7 +136,7 @@ module.exports = {
         }
     },
 
-    //get admin other admin
+    //get admin other 
     getAdminOtherAdmin: async (req, res) => {
         try{
             let { limit, offset } = pagination(req.body.page - 1, req.body.size);
@@ -161,7 +161,7 @@ module.exports = {
     //====================================================================================================
 
     //admin and superadmin
-    //login admin self admin
+    //login admin self
     loginAdminSelfAdmin: async (req, res) => {
         try{
             //create schema
@@ -237,7 +237,7 @@ module.exports = {
         }
     },
 
-    //get admin self admin
+    //get admin self 
     getAdminSelfAdmin: async (req, res) => {
         try{
             //get admin
@@ -255,7 +255,7 @@ module.exports = {
         }
     },
 
-    //update admin self status to not active admin
+    //update admin self status to not active 
     updateStatusAdminSelfAdmin: async (req, res) => {
         try{        
             //update admin status
@@ -293,7 +293,7 @@ module.exports = {
         }
     },
 
-    //logout admin self admin
+    //logout admin self 
     logoutAdminSelfAdmin: async (req, res) => {
         try{
             //delete token

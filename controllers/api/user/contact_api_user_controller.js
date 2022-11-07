@@ -14,7 +14,7 @@ const v = new Validator();
 
 module.exports = {
 
-    //create contact self user
+    //create contact self 
     createContactSelfUser: async (req, res) => {
         try{
             //create schema
@@ -56,7 +56,7 @@ module.exports = {
         }
     },
 
-    //get contact self user
+    //get contact self 
     getContactSelfUser: async (req, res) => {
         try{
 
@@ -85,7 +85,7 @@ module.exports = {
         }
     },
 
-    //get contact self by id user
+    //get contact self by id
     getContactSelfByIdUser: async (req, res) => {
         try{
                 
@@ -115,7 +115,7 @@ module.exports = {
         }
     },
 
-    //update contact self user
+    //update contact self 
     updateContactSelfUser: async (req, res) => {
         try {
 
@@ -190,7 +190,7 @@ module.exports = {
         }
     },
 
-    //delete contact self user
+    //delete contact self 
     deleteContactSelfUser: async (req, res) => {
         try{
             //get data contact

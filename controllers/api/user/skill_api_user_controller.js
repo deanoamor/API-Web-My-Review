@@ -14,7 +14,7 @@ const v = new Validator();
 
 module.exports = {
 
-    //create skill self user
+    //create skill self 
     createSkillSelfUser: async (req, res) => {
         try{
             //crate schema
@@ -51,7 +51,7 @@ module.exports = {
         }
     },
 
-    //get skill self user
+    //get skill self 
     getSkillSelfUser: async (req, res) => {
         try{
             let { limit, offset } = pagination(req.body.page - 1, req.body.size);
@@ -80,7 +80,7 @@ module.exports = {
         }
     },
 
-    //get skill self by id user
+    //get skill self by id 
     getSkillSelfByIdUser: async (req, res) => {
         try{
             //get skill
@@ -109,7 +109,7 @@ module.exports = {
         }
     },
 
-    //update skill self user
+    //update skill self 
     updateSkillSellUser: async (req, res) => {
         try{
             //get skill
@@ -177,7 +177,7 @@ module.exports = {
         }
     },
 
-    //delete skill self user
+    //delete skill self 
     deleteSkillSelfUser: async (req, res) => {
         try{
              //get skill

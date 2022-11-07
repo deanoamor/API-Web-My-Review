@@ -140,7 +140,7 @@ module.exports = {
         }
     },
 
-    //get review that create by self for other user by id user
+    //get review that create by self for other user by id 
     getReviewOtherByIdUser: async (req , res) => {
         try{
             //get data other user review by id
@@ -174,7 +174,7 @@ module.exports = {
         }
     },
 
-    //get review that create by other user for self user
+    //get review that create by other user for self 
     getReviewSelfUser: async (req , res) => {
         try{
             let { limit, offset } = pagination(req.body.page - 1, req.body.size);
@@ -214,7 +214,7 @@ module.exports = {
         }
     },
 
-    //get review that create by other user for self by id user
+    //get review that create by other user for self by id 
     getReviewSelfByIdUser: async (req , res) => {
         try{
             //get review data by id
@@ -247,7 +247,7 @@ module.exports = {
         }
     },
 
-    //update review that create by other user for self user
+    //update review that create by self for other user
     updateReviewOtherUser: async (req , res) => {
         try{
             
@@ -330,7 +330,7 @@ module.exports = {
         }
     },
 
-    //update status review that create by other user for self user
+    //update status review that create by other user for self 
     updateStatusReviewSelfUser: async (req , res) => {
         try{
             //get review

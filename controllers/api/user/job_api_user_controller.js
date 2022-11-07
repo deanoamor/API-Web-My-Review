@@ -14,7 +14,7 @@ const v = new Validator();
 
 module.exports = {
 
-    //create job self user
+    //create job self 
     createJobSelfUser: async (req, res) => {
         try{
             //create schema
@@ -71,7 +71,7 @@ module.exports = {
         }
     },
 
-    //get job self user
+    //get job self
     getJobSelfUser: async (req, res) => {
         try{
 
@@ -100,7 +100,7 @@ module.exports = {
         }
     },
 
-    //get job self by id user
+    //get job self by id 
     getJobSelfByIdUser: async (req, res) => {
         try{
             //get job user
@@ -128,7 +128,7 @@ module.exports = {
         }
     },
 
-    //update job self user
+    //update job self 
     updateJobSelfUser: async (req, res) => {
         try{
 
@@ -217,7 +217,7 @@ module.exports = {
         }
     },
 
-    //delete job self user
+    //delete job self 
     deleteJobSelfUser: async (req, res) => {
         try{
             //get data job
