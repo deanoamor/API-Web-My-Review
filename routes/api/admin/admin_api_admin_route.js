@@ -13,17 +13,17 @@ const multer = require('multer');
 const upload = multer();
 
 //superadmin route
-//create admin other  route
+//create other admin by superadmin route
 route.post('/admin/admin/create/other', //route
 [mid.superAdminMiddleware, upload.array()], //middleware
 adminApiAdminController.createAdminOtherAdmin); //controller
 
-//update admin status other from not active to active route
+//update status other admin by superadmin from not active to active route
 route.put('/admin/admin/update/other/status', //route
 [mid.superAdminMiddleware, upload.array()], //middleware
 adminApiAdminController.updateStatusAdminOtherAdmin); //controller
 
- //get admin other route
+//get other admin for superadmin route
 route.get('/admin/admin/get/other', //route
 [mid.superAdminMiddleware, upload.array()], //middleware
 adminApiAdminController.getAdminOtherAdmin); //controller
@@ -31,22 +31,22 @@ adminApiAdminController.getAdminOtherAdmin); //controller
 //====================================================================================================
 
 //admin and superadmin route
-//login admin self route
+//login admin and superadmin route
 route.post('/admin/admin/login/self', //route
 upload.array(), //middleware
 adminApiAdminController.loginAdminSelfAdmin); //controller
 
-//get admin self route
+//get self admin and superadmin route
 route.get('/admin/admin/get/self', //route
 [mid.adminSuperAdminMiddleware, upload.array()], //middleware
 adminApiAdminController.getAdminSelfAdmin); //controller
 
-//update admin self status to not active route
+//update status self admin to not active  route
 route.put('/admin/admin/update/self/status', //route
 [mid.adminSuperAdminMiddleware], //middleware
 adminApiAdminController.updateStatusAdminSelfAdmin); //controller
 
-//logout admin self route
+//logout self admin and superadmin route
 route.delete('/admin/admin/logout/self', //route
 [mid.adminSuperAdminMiddleware, upload.array()], //middleware
 adminApiAdminController.logoutAdminSelfAdmin); //controller

@@ -8,6 +8,7 @@ const reviewApiUserRoute = require('./api/user/review_api_user_route');
 
 //admin
 const adminApiAdminRoute = require('./api/admin/admin_api_admin_route');
+const userApiAdminRoute = require('./api/admin/user_api_admin_route');
 
 module.exports = function(app,url) {
     //user
@@ -20,4 +21,6 @@ module.exports = function(app,url) {
 
     //admin
     app.use(url, adminApiAdminRoute);
+    app.use(url, userApiAdminRoute);
+
 }
